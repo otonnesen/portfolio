@@ -1,0 +1,70 @@
+body {
+	font-family: Inter, sans-serif;
+}
+nav ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+nav li {
+	float: left;
+	margin: 0 0.25em;
+}
+nav li.active {
+	border-bottom: 1px solid black;
+}
+nav li:not(.active):hover {
+	border-bottom: 1px solid lightgrey;
+}
+nav li a {
+	display: block;
+	text-align: center;
+	padding: 0.25em 1em;
+	text-decoration: none;
+	color: black;
+}
+nav li a:hover {
+	cursor: pointer;
+}
+div#container {
+	display: flex;
+	flex-wrap: wrap;
+}
+header {
+	display: inline-block;
+	min-width: 25em;
+	max-width: 25em;
+	padding: 1em 2em 1em 1em;
+}
+header h2 {
+	display: inline-block;
+}
+header img {
+	width: 8em;
+	float: left;
+	margin-right: 1em;
+	border-radius: 15%;
+}
+header ul#contact {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+header ul#contact li {
+	float: left;
+	margin: 0 1em;
+}
+header ul#contact li a {
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	color: grey;
+}
+main {
+	min-width 40em;
+	max-width: 40em;
+	flex-grow: 1;
+	margin: 2em;
+}

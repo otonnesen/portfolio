@@ -1,0 +1,19 @@
+main ul {
+	list-style-type: none;
+}
+main li {
+	margin: 1em 0em;
+}
+main li a {
+	text-decoration: none;
+	color: black;
+}
+main li a:hover {
+	cursor: pointer;
+}
+main li h2 {
+	margin: 0.25em 0;
+}
+main li p {
+	margin: 0.25em 0;
+}
