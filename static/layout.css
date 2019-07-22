@@ -51,10 +51,12 @@ header ul#contact {
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
+	display: flex;
 }
 header ul#contact li {
 	float: left;
 	margin: 0 1em;
+	flex-grow: 1;
 }
 header ul#contact li a {
 	display: block;
@@ -65,6 +67,5 @@ header ul#contact li a {
 main {
 	min-width 40em;
 	max-width: 40em;
-	flex-grow: 1;
-	margin: 2em;
+	flex-grow: 1; margin: 2em;
 }

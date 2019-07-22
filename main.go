@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -10,25 +11,16 @@ import (
 	"github.com/otonnesen/portfolio/util"
 )
 
-var FakeDatabase map[string]Page
+var ContentDatabase map[string]interface{}
+var PageDatabase map[string]Page
 var NotFound http.HandlerFunc
 
 func main() {
-	FakeDatabase = make(map[string]Page)
-
-	cwd, err := os.Getwd()
+	pages, err := initPageDatabase()
 	if err != nil {
-		log.Panicf("Error getting cwd: %v\n", err)
+		log.Panicf("Error initializing page database: %v\n", err)
 	}
 
-	// Load JSON data
-	f, err := os.Open(filepath.Join(cwd, "data.json"))
-	if err != nil {
-		log.Panicf("Error opening file: %v\n", err)
-	}
-	pages := []Page{}
-	json.NewDecoder(f).Decode(&pages)
-	f.Close()
 	// Create array of CSSData structs to pass to CompileCSS
 	styles := make([]util.CSSData, len(pages))
 	for i, page := range pages {
@@ -39,8 +31,16 @@ func main() {
 		log.Panicf("Error compiling CSS: %v\n", err)
 	}
 
-	for _, page := range pages {
-		FakeDatabase[page.Name] = page
+	ContentDatabase = make(map[string]interface{})
+
+	err = initProjects()
+	if err != nil {
+		log.Panicf("Error initializing projects: %v\n", err)
+	}
+
+	cwd, err := os.Getwd()
+	if err != nil {
+		log.Panicf("Error getting cwd: %v\n", err)
 	}
 	NotFound = util.ParseTemplate(NotFoundTemplate,
 		filepath.Join(cwd, "tmpl/notfound.tmpl"))
@@ -48,19 +48,61 @@ func main() {
 		filepath.Join(cwd, "tmpl/index.tmpl"))
 	Projects := util.ParseTemplate(ProjectsTemplate,
 		filepath.Join(cwd, "tmpl/projects.tmpl"))
-	Blog := util.ParseTemplate(BlogTemplate,
-		filepath.Join(cwd, "tmpl/blog.tmpl"))
-	About := util.ParseTemplate(AboutTemplate,
-		filepath.Join(cwd, "tmpl/about.tmpl"))
-	Contact := util.ParseTemplate(ContactTemplate,
-		filepath.Join(cwd, "tmpl/contact.tmpl"))
+	ProjectPage := util.ParseTemplate(ProjectPageTemplate,
+		filepath.Join(cwd, "tmpl/projects.tmpl"))
 
+	http.Handle("/project/", util.LogRequest(ProjectPage))
 	http.HandleFunc("/", util.LogRequest(Root))
 	http.HandleFunc("/projects", util.LogRequest(Projects))
-	http.HandleFunc("/blog", util.LogRequest(Blog))
-	http.HandleFunc("/about", util.LogRequest(About))
-	http.HandleFunc("/contact", util.LogRequest(Contact))
-	static := http.StripPrefix("/static/", http.FileServer(http.Dir("static")))
-	http.Handle("/static/", static)
+	http.Handle("/static/", http.StripPrefix("/static/",
+		http.FileServer(http.Dir("static"))))
 	http.ListenAndServe(":8080", nil)
+}
+
+func initPageDatabase() ([]Page, error) {
+	PageDatabase = make(map[string]Page)
+
+	cwd, err := os.Getwd()
+	if err != nil {
+		return []Page{}, err
+	}
+	// Load JSON data
+	f, err := os.Open(filepath.Join(cwd, "data/data.json"))
+	if err != nil {
+		return []Page{}, err
+	}
+	pages := []Page{}
+	err = json.NewDecoder(f).Decode(&pages)
+	if err != nil {
+		return []Page{}, err
+	}
+	f.Close()
+	for _, page := range pages {
+		PageDatabase[page.Name] = page
+	}
+
+	return pages, nil
+}
+
+func initProjects() error {
+	cwd, err := os.Getwd()
+	if err != nil {
+		return err
+	}
+	// Load JSON data
+	f, err := os.Open(filepath.Join(cwd, "data/projects.json"))
+	if err != nil {
+		return err
+	}
+
+	projects := ProjectsContent{}
+
+	err = json.NewDecoder(f).Decode(&projects)
+	if err != nil {
+		return err
+	}
+	f.Close()
+	fmt.Printf("%+v\n", projects)
+	ContentDatabase["projects"] = projects
+	return nil
 }

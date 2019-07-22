@@ -5,7 +5,8 @@
 	<title>{{.Title}} | Oliver Tonnesen</title>
 	<meta charset='utf-8'>
 	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
-	<meta name='description' content='Oliver Tonnesen - Computer Science and Mathematics student at the University of Victoria.'>
+	<meta name='description' content='Oliver Tonnesen - Computer Science
+		and Mathematics student at the University of Victoria.'>
 	<meta name='description' content='Oliver Tonnesen'>
 	<link rel='stylesheet' href={{.Stylesheet.Href}}>
 	<link rel='icon' href='/static/favicon.ico' type='image/ico' sizes='64x64'>
@@ -13,31 +14,22 @@
 <body>
 	<nav>
 		<ul>
+			<li {{if eq .Name "home"}}class='active'{{end}}>
+				<a href='/'>Home</a>
+			</li>
 			<li {{if eq .Name "projects"}}class='active'{{end}}>
 				<a href='/projects'>Projects</a>
-			</li>
-
-			<!-- Disabled until further notice. cf main.go:54, main.go:64, -->
-			<!-- routes.go:64, tmpl/layout/layout.tmpl:22 -->
-			<!-- <li {{if eq .Name "blog"}}class='active'{{end}}> -->
-			<!-- 	<a href='/blog'>Blog</a> -->
-			<!-- </li> -->
-			<li {{if eq .Name "about"}}class='active'{{end}}>
-				<a href='/about'>About</a>
-			</li>
-			<li{{if eq .Name "contact"}} class='active'{{end}}>
-				<a href='/contact'>Contact</a>
 			</li>
 		</ul>
 	</nav>
 	<div id='container'>
 		<header>
 			<a href='/'>
-				<img src='static/headshot.jpg' alt='Oliver Tonnesen, 2018' />
+				<img src='/static/headshot.jpg' alt='Oliver Tonnesen, 2018' />
 			</a>
 			<h2>Oliver Tonnesen</h3>
-			<p>Computer Science and Mathematics student at the University of Victoria.
-				Interested in [web dev?]</p>
+			<p>Computer Science and Mathematics student at the University of
+			Victoria. Interested in [web dev?]</p>
 			<ul id='contact'>
 				<li><a href='https://github.com/otonnesen'>GitHub</a></li>
 				<li><a href='mailto:oliver@tonnesen.com'>E-mail</a></li>

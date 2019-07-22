@@ -1,0 +1,37 @@
+[
+	{
+		"name": "home",
+		"title": "Home",
+		"url": "/",
+		"stylesheet": {
+			"href": "/static/build/index.css",
+			"styles": [
+				"/static/layout.css",
+				"/static/index.css"
+			]
+		}
+	},
+	{
+		"name": "projects",
+		"title": "Projects",
+		"url": "/projects",
+		"stylesheet": {
+			"href": "/static/build/projects.css",
+			"styles": [
+				"/static/layout.css",
+				"/static/projects.css"
+			]
+		}
+	},
+	{
+		"name": "notfound",
+		"title": "404: Not Found",
+		"stylesheet": {
+			"href": "/static/build/notfound.css",
+			"styles": [
+				"/static/layout.css",
+				"/static/notfound.css"
+			]
+		}
+	}
+]
