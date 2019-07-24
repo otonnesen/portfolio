@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
 	"strings"
@@ -27,8 +26,10 @@ func ProjectsTemplate(w http.ResponseWriter, r *http.Request,
 		NotFound(w, r)
 		return
 	}
-	data.Content = ContentDatabase["projects"]
-	fmt.Printf("%+v\n", data)
+	p := struct {
+		Projects []Project
+	}{Projects}
+	data.Content = p
 	t.Execute(w, data)
 }
 
@@ -36,11 +37,11 @@ func ProjectPageTemplate(w http.ResponseWriter, r *http.Request,
 	t *template.Template) {
 	url := r.URL.String()
 	name := strings.Split(url, "/")[2]
-	if url != "/project/"+name {
+	if url != "/project/"+name /* TODO: or if project doesn't exist */ {
 		NotFound(w, r)
 		return
 	}
-	data := PageDatabase["notfound"]
+	data := ProjectDatabase[name]
 	t.Execute(w, data)
 }
 

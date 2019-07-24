@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -11,7 +10,8 @@ import (
 	"github.com/otonnesen/portfolio/util"
 )
 
-var ContentDatabase map[string]interface{}
+var Projects []Project
+var ProjectDatabase map[string]Project
 var PageDatabase map[string]Page
 var NotFound http.HandlerFunc
 
@@ -31,7 +31,7 @@ func main() {
 		log.Panicf("Error compiling CSS: %v\n", err)
 	}
 
-	ContentDatabase = make(map[string]interface{})
+	ProjectDatabase = make(map[string]Project)
 
 	err = initProjects()
 	if err != nil {
@@ -49,7 +49,7 @@ func main() {
 	Projects := util.ParseTemplate(ProjectsTemplate,
 		filepath.Join(cwd, "tmpl/projects.tmpl"))
 	ProjectPage := util.ParseTemplate(ProjectPageTemplate,
-		filepath.Join(cwd, "tmpl/projects.tmpl"))
+		filepath.Join(cwd, "tmpl/projectpage.tmpl"))
 
 	http.Handle("/project/", util.LogRequest(ProjectPage))
 	http.HandleFunc("/", util.LogRequest(Root))
@@ -95,14 +95,15 @@ func initProjects() error {
 		return err
 	}
 
-	projects := ProjectsContent{}
+	// projects := []Project{}
 
-	err = json.NewDecoder(f).Decode(&projects)
+	err = json.NewDecoder(f).Decode(&Projects)
 	if err != nil {
 		return err
 	}
 	f.Close()
-	fmt.Printf("%+v\n", projects)
-	ContentDatabase["projects"] = projects
+	for _, project := range Projects {
+		ProjectDatabase[project.Name] = project
+	}
 	return nil
 }

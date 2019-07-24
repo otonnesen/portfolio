@@ -1,19 +1,20 @@
-main ul {
-	list-style-type: none;
+div#projectlist {
 }
-main li {
-	margin: 1em 0em;
+div.projectlistitrem {
 }
-main li a {
+main div.projectlistitem {
+	margin: 1rem 0rem;
+}
+main div.projectlistitem a {
 	text-decoration: none;
 	color: black;
 }
-main li a:hover {
+main div.projectlistitem a:hover {
 	cursor: pointer;
 }
-main li h2 {
-	margin: 0.25em 0;
+main div.projectlistitem h2 {
+	margin: 0.25rem 0;
 }
-main li p {
-	margin: 0.25em 0;
+main div.projectlistitem p {
+	margin: 0.25rem 0;
 }

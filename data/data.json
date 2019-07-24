@@ -2,7 +2,6 @@
 	{
 		"name": "home",
 		"title": "Home",
-		"url": "/",
 		"stylesheet": {
 			"href": "/static/build/index.css",
 			"styles": [
@@ -14,12 +13,22 @@
 	{
 		"name": "projects",
 		"title": "Projects",
-		"url": "/projects",
 		"stylesheet": {
 			"href": "/static/build/projects.css",
 			"styles": [
 				"/static/layout.css",
 				"/static/projects.css"
+			]
+		}
+	},
+	{
+		"name": "projectpage",
+		"title": "",
+		"stylesheet": {
+			"href": "/static/build/projectpage.css",
+			"styles": [
+				"/static/layout.css",
+				"/static/projectpage.css"
 			]
 		}
 	},

@@ -1,13 +1,13 @@
 {{template "layout" .}}
 {{define "content"}}
-<ul>
-{{range .Content.Projects}}
-	<li>
-		<a href={{.URL}}>
-			<h2>{{.Name}}</h2>
-			<p>{{.Description}}</p>
-		</a>
-	</li>
-{{end}}
-</ul>
+<div id='projectlist'>
+	{{range .Content.Projects}}
+		<div class='projectlistitem'>
+			<a href=/project/{{.Name}}>
+				<h2>{{.Name}}</h2>
+				<p>{{.Description}}</p>
+			</a>
+		</div>
+	{{end}}
+</div>
 {{end}}
