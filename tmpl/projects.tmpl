@@ -1,7 +1,7 @@
 {{template "layout" .}}
 {{define "content"}}
 <div id='projectlist'>
-	{{range .Content.Projects}}
+	{{range .ProjectList}}
 		<div class='projectlistitem'>
 			<a href=/project/{{.Name}}>
 				<h2>{{.Name}}</h2>

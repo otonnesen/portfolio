@@ -2,14 +2,8 @@
 	{
 		"name": "project1",
 		"title": "Project 1",
+		"stylesheet": "/static/build/projectpage.css",
 		"url": "www.project1.com",
-		"stylesheet": {
-			"href": "/static/build/projectpage.css",
-			"styles": [
-				"/static/layout.css",
-				"/static/projectpage.css"
-			]
-		},
 		"description": "This is the description for project1",
 		"writeup": [
 			"This is the first paragraph describing project1.",
@@ -21,14 +15,8 @@
 	{
 		"name": "project2",
 		"title": "Project 2",
+		"stylesheet": "/static/build/projectpage.css",
 		"url": "www.project2.com",
-		"stylesheet": {
-			"href": "/static/build/projectpage.css",
-			"styles": [
-				"/static/layout.css",
-				"/static/projectpage.css"
-			]
-		},
 		"description": "This is a much longer description for project2. This is a much longer description for project2. This is a much longer description for project2.",
 		"writeup": [
 		"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu convallis metus, vel rhoncus risus. Ut non accumsan nibh. Sed ornare est quis tincidunt pulvinar. Quisque aliquet nibh eget massa semper fringilla. Mauris id nibh augue. Suspendisse sed maximus dui. Interdum et malesuada fames ac ante ipsum primis in faucibus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque imperdiet fermentum sapien id eleifend.",
@@ -40,14 +28,8 @@
 	{
 		"name": "project3",
 		"title": "Project 3",
+		"stylesheet": "/static/build/projectpage.css",
 		"url": "www.project3.com",
-		"stylesheet": {
-			"href": "/static/build/projectpage.css",
-			"styles": [
-				"/static/layout.css",
-				"/static/projectpage.css"
-			]
-		},
 		"description": "This is the description for project3",
 		"writeup": [
 		"Suspendisse at pretium dolor. Donec eu lobortis erat. Nulla at nulla nibh. Maecenas nec dapibus erat, in rutrum arcu. Nunc tincidunt a sem vitae accumsan. Mauris lobortis lacus at erat semper, sed cursus urna mattis. Sed id porta lectus, vel vestibulum justo. Nam scelerisque dui vitae rhoncus posuere. Integer ante ligula, mattis id nisl at, maximus suscipit ipsum. Pellentesque porta consequat nisi ut fringilla. Cras id ipsum at orci pharetra ultrices vel sed orci. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",

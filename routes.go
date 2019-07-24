@@ -9,8 +9,15 @@ import (
 func RootTemplate(w http.ResponseWriter, r *http.Request,
 	t *template.Template) {
 	url := r.URL.String()
-	data := PageDatabase["home"]
-	// Returns 404 if URL contains anything other than "/"
+	data := struct {
+		Name       string
+		Title      string
+		Stylesheet string
+	}{
+		Name:       "home",
+		Title:      "Home",
+		Stylesheet: "/static/build/home.css",
+	}
 	if url != "/" {
 		NotFound(w, r)
 		return
@@ -21,15 +28,21 @@ func RootTemplate(w http.ResponseWriter, r *http.Request,
 func ProjectsTemplate(w http.ResponseWriter, r *http.Request,
 	t *template.Template) {
 	url := r.URL.String()
-	data := PageDatabase["projects"]
+	data := struct {
+		Name        string
+		Title       string
+		Stylesheet  string
+		ProjectList []Project
+	}{
+		Name:        "projects",
+		Title:       "Projects",
+		Stylesheet:  "/static/build/projects.css",
+		ProjectList: Projects,
+	}
 	if url != "/projects" {
 		NotFound(w, r)
 		return
 	}
-	p := struct {
-		Projects []Project
-	}{Projects}
-	data.Content = p
 	t.Execute(w, data)
 }
 
@@ -37,7 +50,7 @@ func ProjectPageTemplate(w http.ResponseWriter, r *http.Request,
 	t *template.Template) {
 	url := r.URL.String()
 	name := strings.Split(url, "/")[2]
-	if url != "/project/"+name /* TODO: or if project doesn't exist */ {
+	if _, ok := ProjectDatabase[name]; !ok || url != "/project/"+name {
 		NotFound(w, r)
 		return
 	}
@@ -47,7 +60,15 @@ func ProjectPageTemplate(w http.ResponseWriter, r *http.Request,
 
 func NotFoundTemplate(w http.ResponseWriter, r *http.Request,
 	t *template.Template) {
-	data := PageDatabase["notfound"]
+	data := struct {
+		Name       string
+		Title      string
+		Stylesheet string
+	}{
+		Name:       "notfound",
+		Title:      "404: Not Found",
+		Stylesheet: "/static/build/notfound.css",
+	}
 
 	t.Execute(w, data)
 }

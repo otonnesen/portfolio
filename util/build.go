@@ -2,29 +2,29 @@ package util
 
 import (
 	"io"
+	"log"
 	"os"
 	"path/filepath"
 )
 
-type CSSData struct {
-	Href   string   `json:"href"`
-	Styles []string `json:"styles"`
-}
-
-func CompileCSS(pages []CSSData) error {
+func CompileCSS(pages []string) error {
 	cwd, err := os.Getwd()
 	if err != nil {
 		return err
 	}
 	for _, page := range pages {
-		path := filepath.Join(cwd, page.Href)
+		path := filepath.Join(cwd, "static", "build", page+".css")
+		log.Printf("Compiling style %s...\n", path)
 		file, err := os.Create(path)
 		if err != nil {
 			return err
 		}
-		for _, style := range page.Styles {
-			path = filepath.Join(cwd, style)
-			f, err := os.Open(path)
+		styles := []string{
+			filepath.Join(cwd, "static", "layout.css"),
+			filepath.Join(cwd, "static", page+".css"),
+		}
+		for _, style := range styles {
+			f, err := os.Open(style)
 			if err != nil {
 				return err
 			}
