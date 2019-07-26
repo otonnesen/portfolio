@@ -16,7 +16,7 @@ func RootTemplate(w http.ResponseWriter, r *http.Request,
 	}{
 		Name:       "home",
 		Title:      "Home",
-		Stylesheet: "/static/build/home.css",
+		Stylesheet: "static/build/home.css",
 	}
 	if url != "/" {
 		NotFound(w, r)
@@ -36,7 +36,7 @@ func ProjectsTemplate(w http.ResponseWriter, r *http.Request,
 	}{
 		Name:        "projects",
 		Title:       "Projects",
-		Stylesheet:  "/static/build/projects.css",
+		Stylesheet:  "static/build/projects.css",
 		ProjectList: Projects,
 	}
 	if url != "/projects" {
@@ -67,7 +67,7 @@ func NotFoundTemplate(w http.ResponseWriter, r *http.Request,
 	}{
 		Name:       "notfound",
 		Title:      "404: Not Found",
-		Stylesheet: "/static/build/notfound.css",
+		Stylesheet: "static/build/notfound.css",
 	}
 
 	t.Execute(w, data)

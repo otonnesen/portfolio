@@ -2,7 +2,6 @@ package util
 
 import (
 	"io"
-	"log"
 	"os"
 	"path/filepath"
 )
@@ -14,7 +13,7 @@ func CompileCSS(pages []string) error {
 	}
 	for _, page := range pages {
 		path := filepath.Join(cwd, "static", "build", page+".css")
-		log.Printf("Compiling style %s...\n", path)
+		// log.Printf("Compiling style %s...\n", path)
 		file, err := os.Create(path)
 		if err != nil {
 			return err

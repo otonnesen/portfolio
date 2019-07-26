@@ -2,10 +2,12 @@ package main
 
 import (
 	"encoding/json"
+	"html/template"
 	"log"
 	"net/http"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/otonnesen/portfolio/util"
 )
@@ -74,6 +76,7 @@ func initProjects() error {
 	}
 	f.Close()
 	for _, project := range Projects {
+		project.Body = template.HTML(strings.Join(project.BodyList, "\n"))
 		ProjectDatabase[project.Name] = project
 	}
 	return nil

@@ -2,7 +2,5 @@
 {{define "content"}}
 	<h1>{{.Title}}</h1>
 	<img href={{.ImageHref}}>
-	{{range .Writeup}}
-		<p>{{.}}</p>
-	{{end}}
+	{{.Body}}
 {{end}}

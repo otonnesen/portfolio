@@ -3,7 +3,8 @@
 <div id='projectlist'>
 	{{range .ProjectList}}
 		<div class='projectlistitem'>
-			<a href=/project/{{.Name}}>
+			<a href='/project/{{.Name}}'>
+				<img src={{.ImageHref}} alt={{.ImageAlt}} />
 				<h2>{{.Name}}</h2>
 				<p>{{.Description}}</p>
 			</a>

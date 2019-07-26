@@ -2,19 +2,24 @@ div#projectlist {
 }
 div.projectlistitrem {
 }
-main div.projectlistitem {
+div.projectlistitem {
 	margin: 1rem 0rem;
 }
-main div.projectlistitem a {
+div.projectlistitem a {
 	text-decoration: none;
 	color: black;
 }
-main div.projectlistitem a:hover {
+div.projectlistitem a:hover {
 	cursor: pointer;
 }
-main div.projectlistitem h2 {
+div.projectlistitem h2 {
 	margin: 0.25rem 0;
 }
-main div.projectlistitem p {
+div.projectlistitem p {
 	margin: 0.25rem 0;
+}
+div.projectlistitem img {
+	width: 48px;
+	margin: 0 1em;
+	float: left;
 }
