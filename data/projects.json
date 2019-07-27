@@ -3,7 +3,7 @@
 		"name": "loanshark",
 		"title": "Loanshark",
 		"stylesheet": "/static/build/projectpage.css",
-		"url": "project/loanshark",
+		"url": "/project/loanshark",
 		"description": "Web app a friend and I made for the HackUVic hackathon in 2018.",
 		"body": [
 			"<p>You can take a look at this project",
@@ -60,7 +60,40 @@
 			"experiences I had in my first year at UVic. I often find myself",
 			"coming back for reference and to steal code from this project.</p>"
 		],
-		"image_href": "/static/img/sharkfin.png",
+		"image_href": "/static/img/sharkfin.jpg",
+		"image_alt": "Loanshark sharkfin logo"
+	},
+	{
+		"name": "battlesnake",
+		"title": "Battlesnake",
+		"stylesheet": "/static/build/projectpage.css",
+		"url": "/project/battlesnake",
+		"description": "Snake AI created to compete in battlesnake 2019.",
+		"body": [
+		],
+		"image_href": "/static/img/battlesnake.jpg",
+		"image_alt": "Battlesnake Snake Head Logo"
+	},
+	{
+		"name": "filesystem",
+		"title": "Unix-Style Filesystem",
+		"stylesheet": "/static/build/projectpage.css",
+		"url": "/project/filesystem",
+		"description": "Filesystem written in C for my Operating Systems class.",
+		"body": [
+		],
+		"image_href": "/static/img/filesystem.jpg",
+		"image_alt": "Filesystem folder/directory"
+	},
+	{
+		"name": "shell",
+		"title": "Command-Line Shell",
+		"stylesheet": "/static/build/projectpage.css",
+		"url": "/project/shell",
+		"description": "Command-line shell written in C for my Operating Systems class.",
+		"body": [
+		],
+		"image_href": "/static/img/shell.jpg",
 		"image_alt": "Loanshark sharkfin logo"
 	}
 ]
