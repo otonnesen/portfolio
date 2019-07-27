@@ -1,30 +1,31 @@
 body {
 	font-family: Inter, sans-serif;
 }
-nav ul {
+body > nav ul {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
 }
-nav li {
+body > nav li {
 	float: left;
 	margin: 0 0.25rem;
+	border-bottom: 1px solid white;
 }
-nav li.active {
+body > nav li.active {
 	border-bottom: 1px solid black;
 }
-nav li:not(.active):hover {
+body > nav li:not(.active):hover {
 	border-bottom: 1px solid lightgrey;
 }
-nav li a {
+body > nav li a {
 	display: block;
 	text-align: center;
 	padding: 0.25rem 1rem;
 	text-decoration: none;
 	color: black;
 }
-nav li a:hover {
+body > nav li a:hover {
 	cursor: pointer;
 }
 div#container {
@@ -48,19 +49,20 @@ header img {
 	margin-right: 1rem;
 	border-radius: 15%;
 }
-header ul#contact {
+ul#contact {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
 	display: flex;
 }
-header ul#contact li {
+ul#contact li {
+	border: 1px solid white;
 	float: left;
 	margin: 0 1rem;
 	flex-grow: 1;
 }
-header ul#contact li a {
+ul#contact li a {
 	display: block;
 	text-align: center;
 	text-decoration: none;
