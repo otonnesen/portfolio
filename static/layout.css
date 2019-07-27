@@ -37,7 +37,7 @@ div#container {
 header {
 	display: inline-block;
 	min-width: 35vh;
-	max-width: 45vh;
+	max-width: 50vh;
 	padding: 1rem 2rem;
 }
 header h2 {
@@ -55,6 +55,7 @@ ul#contact {
 	padding: 0;
 	overflow: hidden;
 	display: flex;
+	flex-wrap: wrap;
 }
 ul#contact li {
 	border: 1px solid white;
