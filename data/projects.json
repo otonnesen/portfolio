@@ -76,7 +76,7 @@
 		"body": [
 		],
 		"image_href": "/static/img/portfolio.jpg",
-		"image_alt": "Portfolio icon"
+		"image_alt": "Portfolio/folder icon"
 	},
 	{
 		"name": "battlesnake",
@@ -170,7 +170,7 @@
 			"when designing a large or critical system.</p>"
 		],
 		"image_href": "/static/img/filesystem.jpg",
-		"image_alt": "Filesystem folder/directory"
+		"image_alt": "Filesystem folder/directory icon"
 	},
 	{
 		"name": "shell",
@@ -179,8 +179,51 @@
 		"url": "/project/shell",
 		"description": "Command-line shell written in C for my Operating Systems class.",
 		"body": [
+			"<p>You can view the code for this project",
+			"<a href='https://github.com/otonnesen/coursework/tree/master/csc360/a1/kapish'>here</a>.</p>",
+			"<p>The first assignment in my Operating Systems class was to",
+			"build a command-line shell for the Linux kernel. This shell had",
+			"to implement four built in commands: <code>setenv</code>,",
+			"<code>unsetenv</code>, <code>getenv</code>, <code>cd</code>,",
+			"and <code>exit</code>. It also had to be able to execute",
+			"arbitrary programs installed on the system. This project taught",
+			"me about communicating with the Linux kernel with syscalls,",
+			"reading and parsing user input, and forking processes.</p>",
+			"<p>Before starting on this project, I thought that my shell would",
+			"have to keep track of the environment  on its own, but this is",
+			"taken care of by the kernel itself. When the shell is first run,",
+			"it inherits the environment from which it was originally run.",
+			"From there, it uses syscalls to manipulate environment",
+			"variables.</p>",
+			"<p>My first task was to read and parse the user's input. My shell",
+			"reads one line from the standard input into a string. The string",
+			"is then parsed into an array of tokens and passed to a function",
+			"to try to execute the command. If the first token is a built in",
+			"command, the shell tries to run it with the arguments given,",
+			"otherwise it tries to run the command as an installed",
+			"program.</p>",
+			"<p>To run the command as an installed program, the shell forks",
+			"and searches the directories in the PATH variable for a binary",
+			"of the same name. The process running the shell then waits for",
+			"its forked child to finish execution before resuming.</p>",
+			"<p>I implemented an additional built in command,",
+			"<code>history</code>, which maintained a linked list of commands",
+			"used throughout the session, and allowed the user to repeat",
+			"commands by prepending a <code>!</code> to a prefix of the",
+			"command they wish to use, similarly to the bash shell. This was",
+			"an interesting feature to implement since I'd previously only",
+			"made linked lists and similar data structures in languages with",
+			"automatic memory management, so handling allocating and freeing",
+			"nodes in the history list was a good way to help cement my",
+			"understanding of memory management in C.</p>",
+			"<p>This project was fun because it was the first C program I'd",
+			"written that felt like it could serve a real purpose, and wasn't",
+			"done just for the sake of having done it. It also allowed me to ",
+			"practice searching and reading the C and Linux documentation to",
+			"most efficiently figure out the best way to do something, which",
+			"turned out being very important for the rest of the course.</p>"
 		],
 		"image_href": "/static/img/shell.jpg",
-		"image_alt": "Loanshark sharkfin logo"
+		"image_alt": "Command line shell icon"
 	}
 ]
