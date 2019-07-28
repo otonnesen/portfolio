@@ -74,6 +74,20 @@
 		"url": "/project/portfolio",
 		"description": "Personal website made to show off my projects.",
 		"body": [
+			"<p>You can view this website's code",
+			"<a href='https://github.com/otonnesen/portfolio'>here</a>.</p>",
+			"<p>I quickly threw this website together over the course of a",
+			"week or so. When I first started working on it, I was on",
+			"vacation staying somewhere with around 2Kbps of bandwidth, so I",
+			"was acutely aware of how long webpages could take to load when",
+			"they had to load a bunch of junk. I tried to keep this website as",
+			"minimal as possible. No fancy pictures, no JavaScript frameworks,",
+			"just HTML and CSS. I wrote my server in Go, and each project's",
+			"info is just stored in a JSON file. I had originally planned to",
+			"make the backend a lot more modular, with more templating,",
+			"a UI to add projects, and a database, but decided it made more",
+			"sense to keep it quite simple since I won't be updating it very",
+			"frequently.</p>"
 		],
 		"image_href": "/static/img/portfolio.jpg",
 		"image_alt": "Portfolio/folder icon"
