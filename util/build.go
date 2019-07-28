@@ -11,6 +11,13 @@ func CompileCSS(pages []string) error {
 	if err != nil {
 		return err
 	}
+	buildpath := filepath.Join(cwd, "static", "build")
+	if _, err = os.Stat(buildpath); os.IsNotExist(err) {
+		err = os.Mkdir(buildpath, 0700)
+		if err != nil {
+			return err
+		}
+	}
 	for _, page := range pages {
 		path := filepath.Join(cwd, "static", "build", page+".css")
 		// log.Printf("Compiling style %s...\n", path)
