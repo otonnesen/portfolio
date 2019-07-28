@@ -20,7 +20,6 @@ func main() {
 	// Create array of CSSData structs to pass to CompileCSS
 	styles := []string{
 		"home",
-		"projects",
 		"projectpage",
 		"notfound",
 	}
@@ -44,14 +43,11 @@ func main() {
 		filepath.Join(cwd, "tmpl/notfound.tmpl"))
 	Root := util.ParseTemplate(RootTemplate,
 		filepath.Join(cwd, "tmpl/index.tmpl"))
-	Projects := util.ParseTemplate(ProjectsTemplate,
-		filepath.Join(cwd, "tmpl/projects.tmpl"))
 	ProjectPage := util.ParseTemplate(ProjectPageTemplate,
 		filepath.Join(cwd, "tmpl/projectpage.tmpl"))
 
 	http.Handle("/project/", util.LogRequest(ProjectPage))
 	http.HandleFunc("/", util.LogRequest(Root))
-	http.HandleFunc("/projects", util.LogRequest(Projects))
 	http.Handle("/static/", http.StripPrefix("/static/",
 		http.FileServer(http.Dir("static"))))
 	http.ListenAndServe(":8080", nil)
@@ -67,8 +63,6 @@ func initProjects() error {
 	if err != nil {
 		return err
 	}
-
-	// projects := []Project{}
 
 	err = json.NewDecoder(f).Decode(&Projects)
 	if err != nil {

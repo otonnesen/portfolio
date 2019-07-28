@@ -10,36 +10,17 @@ func RootTemplate(w http.ResponseWriter, r *http.Request,
 	t *template.Template) {
 	url := r.URL.String()
 	data := struct {
-		Name       string
-		Title      string
-		Stylesheet string
-	}{
-		Name:       "home",
-		Title:      "Home",
-		Stylesheet: "static/build/home.css",
-	}
-	if url != "/" {
-		NotFound(w, r)
-		return
-	}
-	t.Execute(w, data)
-}
-
-func ProjectsTemplate(w http.ResponseWriter, r *http.Request,
-	t *template.Template) {
-	url := r.URL.String()
-	data := struct {
 		Name        string
 		Title       string
 		Stylesheet  string
 		ProjectList []Project
 	}{
-		Name:        "projects",
-		Title:       "Projects",
-		Stylesheet:  "static/build/projects.css",
+		Name:        "home",
+		Title:       "Home",
+		Stylesheet:  "static/build/home.css",
 		ProjectList: Projects,
 	}
-	if url != "/projects" {
+	if url != "/" {
 		NotFound(w, r)
 		return
 	}
