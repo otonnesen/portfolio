@@ -1,9 +1,7 @@
 div#projectlist {
 }
-div.projectlistitrem {
-}
 div.projectlistitem {
-	margin: 1rem 0rem;
+	margin: 2rem 0rem;
 }
 div.projectlistitem a {
 	text-decoration: none;
