@@ -17,6 +17,13 @@ var ProjectDatabase map[string]Project
 var NotFound http.HandlerFunc
 
 func main() {
+	port := os.Getenv("PORT") // Get Heroku port
+
+	if port == "" {
+		log.Printf("$PORT not set, defaulting to 8080")
+		port = "8080"
+	}
+
 	// Create array of CSSData structs to pass to CompileCSS
 	styles := []string{
 		"home",
@@ -50,7 +57,7 @@ func main() {
 	http.HandleFunc("/", util.LogRequest(Root))
 	http.Handle("/static/", http.StripPrefix("/static/",
 		http.FileServer(http.Dir("static"))))
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":"+port, nil)
 }
 
 func initProjects() error {
