@@ -41,16 +41,43 @@ nav ul li a:hover {
 	cursor: pointer;
 }
 #container {
-	display: flex;
 	padding-top: 60px;
 	width: 960px;
 	margin: 0 auto;
 }
 header {
+	height: 1px;
+	float: left;
 	width: 160px;
 }
 main {
+	float: left;
 	width: 700px;
 	padding-left: 60px;
 }
 
+@media only screen and (min-width: 751px) and (max-width: 1000px) {
+	#container {
+		width: 750px;
+	}
+	header {
+		width: 150px;
+	}
+	main {
+		width: 550px;
+		padding-left: 50px;
+	}
+}
+@media only screen and (max-width: 750px) {
+	#container {
+		width: 300px;
+	}
+	header {
+		width: 300px;
+		height: 300px;
+	}
+	main {
+		width: 300px;
+		padding-left: 0px;
+	}
+}
