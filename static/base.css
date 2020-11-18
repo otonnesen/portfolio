@@ -1,0 +1,56 @@
+body {
+	font-family: Inter, sans-serif;
+}
+#logo {
+	letter-spacing: -1px;
+	font-family: Times New Roman, serif;
+	font-size: 28px;
+	font-weight: normal;
+}
+nav {
+	position: fixed;
+	width: 160px;
+}
+nav ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+nav ul li {
+	border-bottom: 1px solid white;
+	font-size: 14px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+nav ul li.active {
+	text-decoration: underline;
+	text-decoration-color: black;
+}
+nav ul li:not(.active):hover {
+	text-decoration: underline;
+	text-decoration-color: lightgrey;
+}
+nav ul li a {
+	display: block;
+	padding: 0.25rem 0;
+	text-decoration: none;
+	color: black;
+}
+nav ul li a:hover {
+	cursor: pointer;
+}
+#container {
+	display: flex;
+	padding-top: 60px;
+	width: 960px;
+	margin: 0 auto;
+}
+header {
+	width: 160px;
+}
+main {
+	width: 700px;
+	padding-left: 60px;
+}
+
