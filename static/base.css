@@ -55,6 +55,24 @@ main {
 	width: 700px;
 	padding-left: 60px;
 }
+ul#projects {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+ul#projects a {
+	/* text-decoration: none; */
+	color: black;
+}
+ul#projects li {
+	margin-bottom: 10px;
+}
+ul#projects a:hover {
+	/* text-decoration: underline; */
+	/* text-decoration-color: lightgrey; */
+	color: grey;
+}
 
 @media only screen and (min-width: 751px) and (max-width: 1000px) {
 	#container {
