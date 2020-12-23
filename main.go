@@ -7,8 +7,6 @@ import (
 	"path/filepath"
 )
 
-var logger *log.Logger
-
 func main() {
 	port := os.Getenv("PORT")
 
@@ -24,18 +22,19 @@ func main() {
 
 	defer logFile.Close()
 
-	logger = log.New(logFile, "", log.LstdFlags)
+	logger := log.New(logFile, "", log.LstdFlags)
 
-	m := &middleware{http.FileServer(exclDirFs{http.Dir("./static/")})}
+	m := &middleware{logger, http.FileServer(exclDirFs{http.Dir("./static/")})}
 	log.Fatal(http.ListenAndServe(":"+port, m))
 }
 
 type middleware struct {
+	l *log.Logger
 	h http.Handler
 }
 
 func (m *middleware) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	logger.Printf("[%s]: %s %q", r.RemoteAddr, r.Method, r.URL.String())
+	m.l.Printf("[%s]: %s %q", r.RemoteAddr, r.Method, r.URL.String())
 	m.h.ServeHTTP(w, r)
 }
 
@@ -43,6 +42,7 @@ type exclDirFs struct {
 	fs http.FileSystem
 }
 
+// Wrapper for http.Dir to exclude directories
 func (fs exclDirFs) Open(path string) (http.File, error) {
 	f, err := fs.fs.Open(path)
 	if err != nil {
