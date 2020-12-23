@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Home | Oliver Tonnesen</title>
+  <meta charset='utf-8'>
+  <meta name='viewport' content=
+  'width=device-width, initial-scale=1.0'>
+  <meta name='description' content=
+  'Oliver Tonnesen - Computer Science and Mathematics student at the University of Victoria.'>
+  <meta name='description' content='Oliver Tonnesen'>
+  <link rel='stylesheet' href="/base.css">
+</head>
+<body>
+  <div id='container'>
+    <header>
+      <nav>
+        <h2 id='logo'>Oliver Tonnesen</h2>
+        <ul>
+          <li>
+            <a href='/'>Home</a>
+          </li>
+          <li>
+            <a href='/projects.html'>Projects</a>
+          </li>
+          <li>
+            <a href='/contact.html'>Contact Me</a>
+          </li>
+          <li>
+            <a href='https://github.com/otonnesen'>Github</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+
+			<h1>Unix-Style Filesystem</h1>
+
+			<p>You can view the code for this project <a href='https://github.com/otonnesen/coursework/tree/master/csc360/a3'>here</a>.
+
+			<p>Creating a filesystem from scratch was the final project in my Operating Systems class at UVic. All in all the project took around a month to complete. I learned a lot about writing C code and Linux syscalls, low-level data structures, and what kinds of trade offs must be made when writing and design OS-level (really any) software.</p>
+
+			<p>The filesystem was designed for a 2MB virtual disk on the computer's physical disk, so the first thing I did was implement a primitive disk API similar to one that might be included on a real physical disk. The API allowed for reading and writing of blocks -- 512 byte segments of contiguous data on the disk.</p>
+
+			<p>My next task was to begin to implement some of the data structures I planned to use in my filesystem, including bitmaps, the superblock, inodes, files, and directories. My bitmap was simply an array of 32 bit unsigned integers with some binary arithmetic abstracted away into functions like <code>set_bit</code> and <code>clr_bit</code>. My block type was a union of many different types, like arrays of inodes, bitmaps showing which blocks were available, or files' block pointers and directory lists.</p>
+
+			<p>This project was one of the first in which I had to make decisions regarding the trade offs of different methods of achieving my goal. I chose to write to files directly instead of to a cache. This significantly decreased the speed of writes in my filesystem, but increased its reliability; since crashing before checking in writes from the cache was no longer possible, no data would be lost because it hadn't yet been written to disk unless the crash occurred during the write itself. Instead of writing files in contiguous segments in the free space at the end of the disk, which would have again increased write speeds, I decided to write file data into whatever blocks were available regardless of whether or not they were contiguous. This eliminated the need to go through periodically and check for and fill any space that had freed up in the disk.</p>
+
+			<p>This project has certainly been one of my largest to date, coming in at around 1 100 lines of code overall. The C, Linux, and data structures skills are definitely handy, but probably the most important takeaway from this project is the mindset that every decision has a trade off, and to really analyze what my needs are when designing a large or critical system.</p>
+
+		</main>
+  </div>
+</body>
+</html>
