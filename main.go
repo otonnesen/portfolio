@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
 )
 
 var logger *log.Logger
@@ -25,7 +26,7 @@ func main() {
 
 	logger = log.New(logFile, "", log.LstdFlags)
 
-	m := &middleware{http.FileServer(http.Dir("./static/"))}
+	m := &middleware{http.FileServer(exclDirFs{http.Dir("./static/")})}
 	log.Fatal(http.ListenAndServe(":"+port, m))
 }
 
@@ -36,4 +37,29 @@ type middleware struct {
 func (m *middleware) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	logger.Printf("[%s]: %s %q", r.RemoteAddr, r.Method, r.URL.String())
 	m.h.ServeHTTP(w, r)
+}
+
+type exclDirFs struct {
+	fs http.FileSystem
+}
+
+func (fs exclDirFs) Open(path string) (http.File, error) {
+	f, err := fs.fs.Open(path)
+	if err != nil {
+		return nil, err
+	}
+
+	s, err := f.Stat()
+	if s.IsDir() {
+		index := filepath.Join(path, "index.html")
+		if _, err := fs.fs.Open(index); err != nil {
+			if e := f.Close(); e != nil {
+				return nil, e
+			}
+
+			return nil, err
+		}
+	}
+
+	return f, nil
 }
