@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Home | Oliver Tonnesen</title>
+  <meta charset='utf-8'>
+  <meta name='viewport' content=
+  'width=device-width, initial-scale=1.0'>
+  <meta name='description' content=
+  'Oliver Tonnesen - Computer Science and Mathematics student at the University of Victoria.'>
+  <meta name='description' content='Oliver Tonnesen'>
+  <link rel='stylesheet' href="/base.css">
+</head>
+<body>
+  <div id='container'>
+    <header>
+      <nav>
+        <h2 id='logo'>Oliver Tonnesen</h2>
+        <ul>
+          <li>
+            <a href='/'>Home</a>
+          </li>
+          <li>
+            <a href='/projects.html'>Projects</a>
+          </li>
+          <li>
+            <a href='/contact.html'>Contact Me</a>
+          </li>
+          <li>
+            <a href='https://github.com/otonnesen'>Github</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+
+			<h1>Compiler</h1>
+
+			<p>You can view the code for this project <a href='https://github.com/otonnesen/coursework/tree/master/csc435'>here</a>.
+
+			<p>Writing a compiler for the "Unnamed Language" was the subject of the four homework assignments in my Compiler Construction class at UVic. This project spanned the entire semester, and seeing everything come together into a real, working compiler made it one of my favourite projects to date.</p>
+
+			<h3>Lexer/parser</h3>
+			<p>The first order of business was the implementation of a lexer and parser for the language. For this I elected to use the ANTLR3 parser generator. The main difficulty of this step was getting used to ANTLR's syntax and error messages, but otherwise it was fairly straightforward. At this point, the program would send an error message if there was a syntax error in the input, and do nothing otherwise.</p>
+
+			<h3>Abstract syntax tree</h3>
+			<p>Once I had a working parser for the language, I added code to return an abstract syntax tree upon successful parsing of the input program. Storing the code in a tree structure allows for much easier analysis of the program. Specifically, type checking of the program lends itself very nicely to this tree structure. An expression such as <code>a + b</code> will be stored as a binary <code>PlusExpression</code> vertex with two <code>Variable</code> children with known types, and we can simply ensure that there is a valid way to add the types of <code>a</code> and <code>b</code> together. Once this is checked, we can determine the type of the <code>PlusExpression</code> vertex, and use it in further analysis if necessary.</p>
+
+			<h3>Intermediate code generation</h3>
+			<p>With type checking implemented and tested, I could be reasonably sure that any input programs continuing past this point are at least syntactically correct. Being able to assume correct syntax makes any semantic analysis much easier. At this point, the compiler generates intermediate representation code and ensures that all variables exist in any scope in which they're used, among other minor analyses.</p>
+
+			<h3>JVM bytecode generation</h3>
+			<p>The syntax of our intermediate representation code was already very similar to the JVM's bytecode, so while this last compilation step isn't a direct one-to-one translation, it is very straightforward. Now the compiler outputs valid JVM bytecode that can be assembled into an executable class file.</p>
+
+			<p>My main takeaways from this project were learning how to design and maintain the code from a higher level than I was previously used to. Since I would be using the same code base over the entire semester, I had to design, document, and track my implementation in such a way that it would be easily modifiable as I added features.</p>
+
+		</main>
+  </div>
+</body>
+</html>
