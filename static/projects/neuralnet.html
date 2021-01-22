@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Home | Oliver Tonnesen</title>
+  <meta charset='utf-8'>
+  <meta name='viewport' content=
+  'width=device-width, initial-scale=1.0'>
+  <meta name='description' content=
+  'Oliver Tonnesen - Computer Science and Mathematics student at the University of Victoria.'>
+  <meta name='description' content='Oliver Tonnesen'>
+  <link rel='stylesheet' href="/base.css">
+</head>
+<body>
+  <div id='container'>
+    <header>
+      <nav>
+        <h2 id='logo'>Oliver Tonnesen</h2>
+        <ul>
+          <li>
+            <a href='/'>Home</a>
+          </li>
+          <li>
+            <a href='/projects.html'>Projects</a>
+          </li>
+          <li>
+            <a href='/contact.html'>Contact Me</a>
+          </li>
+          <li>
+            <a href='https://github.com/otonnesen'>Github</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+
+			<h1>Deep Tree Network for Object Classification</h1>
+
+			<p>For the final project in UVic's CSC 486B: Introduction to Deep Learning for Computer Vision, my group implemented and modified a <a href='https://arxiv.org/abs/1904.02860'>state of the art machine learning model</a>.</p>
+
+			<p>A face spoof attack is an attempt to deceive a facial recognition system by using a fake face to either impersonate a genuine user or to hide an attacker's identity. Some common such attacks include the use of makeup, masks, or printed photographs to try to bypass recognition systems. Face anti-spoofing is used as a preliminary step to filter out these spoofs before they're sent to the recognition system. The paper we reproduced used a novel Deep Tree Network to try to identify face spoofs using techniques it was not trained against.</p>
+
+			<h3>Contributions</h3>
+
+			<p>Our primary contribution was to apply this model to a different binary classification problem. Instead of deciding whether an image was a genuine face or a spoofed one, we modified the model to decide whether an image was human-made (like a car, a toaster, or a house) or natural (like a tree, a lake, or an animal).</p>
+
+			<p>Our implementation also differed from the original paper's in a number of other ways:
+			<ul>
+				<li>We ported the model from TensorFlow2 to PyTorch</li>
+				<li>Instead of hardcoding the tree depth to 3, we made it a variable hyperparameter</li>
+				<li>We removed the face anti-spoofing specific binary masks used in one of the primary network modules of the original model</li>
+			</ul></p>
+
+			<h3>Report</h3>
+			<p>A more complete write-up including our methodology and results can be downloaded <a href='/csc486breport.pdf'>here</a>.</p>
+
+		</main>
+  </div>
+</body>
+</html>
