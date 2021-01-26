@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Home | Oliver Tonnesen</title>
+  <meta charset='utf-8'>
+  <meta name='viewport' content=
+  'width=device-width, initial-scale=1.0'>
+  <meta name='description' content=
+  'Oliver Tonnesen - Software Developer in Victoria, BC.'>
+  <meta name='description' content='Oliver Tonnesen'>
+  <link rel='stylesheet' href="/base.css">
+</head>
+<body>
+  <div id='container'>
+    <header>
+      <nav>
+        <h2 id='logo'>Oliver Tonnesen</h2>
+        <ul>
+          <li>
+            <a href='/'>Home</a>
+          </li>
+          <li>
+            <a href='/projects.html'>Projects</a>
+          </li>
+          <li>
+            <a href='/contact.html'>Contact Me</a>
+          </li>
+          <li>
+            <a href='/resume.pdf'>Resume</a>
+          </li>
+          <li>
+            <a href='https://github.com/otonnesen'>Github</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+
+			<h1>HTTP over RDP</h1>
+
+			<p>For the final project in my Computer Communication and Networks course, I was tasked with implementing a simple HTTP client/server over the Reliable Datagram Protocol (RDP) &mdash; essentially a simplified subset of TCP &mdash; using Python. The most challenging aspect of this project was implementing everything in a way that allows for easy recovery from packet loss, latency, network congestion, and other uncertainties that come with unreliable transport networks.</p>
+
+			<h3>Packet format</h3>
+			<p>Our RDP packets had to adhere to a strict specification and be transmitted as strings, so we couldn't use Python's built-in pickle package to encode/decode objects as byte strings. The code to do the encoding and parsing of packets was a good starting point, and allowed for some initial testing of Python's socket functionality.</p>
+
+			<h3>Design and architecture</h3>
+			<p>The meat of my RDP implementation is a state machine that primarily keeps track of the state of the connection, but also stores a number of related variables and data such as the sender and receiver buffers, congestion control windows, and acknowledgement and sequence numbers.</p>
+
+			<p>While transport protocols like RDP lend themselves very nicely to state machine implementations, getting started was initially very difficult; two major reasons for this were:
+			<ol>
+				<li>interdependence between states, and</li>
+				<li>synchronization between client/server states.</li>
+			</ol>
+			These two factors made initial testing quite difficult, since the while the client and server use the same state machine, their state diverges very quickly during connection establishment and termination. What's more, transitions between states often take several different paths, meaning certain situations (such as the dropping of specific packets during connection establishment) could not be properly tested until a whole sequence of states had been implemented.</p>
+			
+			<p>After struggling with this part of the implementation for a while, I spent some more time drawing state diagrams on paper to figure out the different routes the client and server could take to establish and terminate a connection. Once I got this design mostly correct, I was able to implement the rest of the state machine fairly easily.</p>
+
+			<h3>Connection synchronization</h3>
+			<p>My RDP implementation synchronizes connections very similarly to TCP. That is, a three-way handshake (SYN, SYN/ACK, ACK) to establish a connection and a two-way handshake (FIN, FIN/ACK, ACK/timeout) to terminate it.</p>
+
+			<h3>Packet loss correction</h3>
+			<p>The state machine implementation I used proved incredibly useful when it came to packet loss correction. I was able to decide how to have each state respond on an event-by-event basis. For packet loss, I simply implemented a timeout event that each state had to respond to; usually this was just re-sending whatever packet was last sent, but certain states required more to be done, like checking if duplicated acknowledgement packets had been sent, triggering the retransmission of earlier data packets.</p>
+
+			<h3>Congestion control</h3>
+			<p>My RDP implementation borrowed a lot of ideas from TCP for congestion control as well. This mostly entailed the recipient of the data imposing upon the sender a finite window of how much data can be sent at once. This way, instead of the sender waiting for the recipient to respond to every single packet it sends, it can keep sending until it has sent as much as the recipient says it can receive. Once this window is filled, the sender waits until the recipient starts acknowledging the sent packets before it sends more. This window can be increased or decreased as network conditions change to avoid over- or under-utilizing network resources.</p>
+
+			<h3>HTTP over RDP</h3>
+			<p>Implementing an HTTP server using actual TCP sockets was the subject of an earlier assignment in the same course. I tried to have the external API of my RDP implementation mirror that of TCP as much as possible, so when it came time to implement the same HTTP server using RDP sockets, I was mostly able to drop the code I'd written a few months ago into place with a few minor tweaks.</p>
+
+			<p>This project was just as much an exercise in design and architecture as it was in learning computer networking. This was probably the most complex piece of software I've written, due to all the different ways the code can interact with itself. I learned a lot about not only having a plan for my code before writing it, but also having a good plan with enough detail to actually help me implement the code efficiently and in a way that can be easily maintained.</p>
+
+		</main>
+  </div>
+</body>
+</html>
